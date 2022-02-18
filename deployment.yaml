@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: piston-deployment
+  labels:
+    app: piston
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: piston
+  template:
+    metadata:
+      labels:
+        app: piston
+    spec:
+      containers:
+      - name: piston
+        image: sahar2339/stacks:piston
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            cpu: 200m
+            memory: 200M
+          limits:
+            cpu: 400m
+            memory: 500G
+      imagePullSecrets:
+      - name: stacks-dockerhub
+
